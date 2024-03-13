@@ -2,21 +2,48 @@ import React, { useState } from "react";
 import PriceCalculator from "./PriceCalculator";
 
 function Reservation() {
-  const [day, setCount] = useState(0);
+  const [day, setDay] = useState(0);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
   const increase = () => {
-    setCount(day + 1);
+    setDay(day + 1);
   };
 
   const decrease = () => {
-    setCount(day - 1);
+    setDay(day - 1 >= 0 ? day - 1 : 0); // Gün sayısının negatif olmaması için kontrol eklendi
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Formun gönderilme işlemleri burada gerçekleştirilebilir
+    // Örneğin, bir API'ye veri göndermek veya başka bir işlem yapmak
+    // Ardından formu temizleyebilirsiniz
+    setDay(0);
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setIsChecked(false);
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <p>gün sayısı: {day}</p>
-        <button onClick={decrease}> azalt</button>
-        <button onClick={increase}> artır</button>
+        <button type="button" onClick={decrease}>
+          {" "}
+          azalt
+        </button>{" "}
+        {/* Formun gönderilmesini önlemek için type="button" eklendi */}
+        <button type="button" onClick={increase}>
+          {" "}
+          artır
+        </button>{" "}
+        {/* Formun gönderilmesini önlemek için type="button" eklendi */}
         <PriceCalculator day={day} />
         <div className="row">
           <div className="col">
@@ -25,6 +52,8 @@ function Reservation() {
               type="text"
               className="form-control"
               placeholder="First name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
           <div className="col">
@@ -33,11 +62,11 @@ function Reservation() {
               type="text"
               className="form-control"
               placeholder="Last name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </div>
         </div>
-      </form>
-      <form>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <input
@@ -46,6 +75,8 @@ function Reservation() {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <small id="emailHelp" className="form-text text-muted">
             We'll never share your email with anyone else.
@@ -58,6 +89,8 @@ function Reservation() {
             className="form-control"
             id="exampleInputPassword1"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="form-check">
@@ -65,6 +98,8 @@ function Reservation() {
             type="checkbox"
             className="form-check-input"
             id="exampleCheck1"
+            checked={isChecked}
+            onChange={(e) => setIsChecked(e.target.checked)}
           />
           <label className="form-check-label" htmlFor="exampleCheck1">
             Check me out

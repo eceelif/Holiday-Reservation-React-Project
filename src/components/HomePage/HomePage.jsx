@@ -1,9 +1,10 @@
 import React from "react";
+import HotelList from "../hotels";
 
 function HomePage() {
   return (
     <>
-      <p>deneme home page</p>
+      <HotelList />
     </>
   );
 }
