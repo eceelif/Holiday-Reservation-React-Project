@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Reservation from "./components/Reservationx";
@@ -8,23 +8,9 @@ import WeatherComponent from "./components/WeatherData";
 function App() {
   return (
     <Router>
-      <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/home">Home</Link>
-            </li>
-            <li>
-              <Link to="/reservation">Reservation</Link>
-            </li>
-            <li>
-              <Link to="/weather">Weather</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <div className="App"></div>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/reservation" element={<Reservation />} />
         <Route path="/weather" element={<WeatherComponent />} />
       </Routes>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import HomePageHeader from "./HomePage/HomePageHeader";
 
 const WeatherComponent = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -47,6 +48,7 @@ const WeatherComponent = () => {
 
   return (
     <div>
+      <HomePageHeader></HomePageHeader>
       <h2>Weather Information</h2>
       {weatherData && (
         <div>

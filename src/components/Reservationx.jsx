@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PriceCalculator from "./PriceCalculator";
+import Room from "./Rooms";
+import HomePageHeader from "./HomePage/HomePageHeader";
 
 function Reservation() {
   const [day, setDay] = useState(0);
@@ -8,13 +10,14 @@ function Reservation() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState("Standard");
 
   const increase = () => {
     setDay(day + 1);
   };
 
   const decrease = () => {
-    setDay(day - 1 >= 0 ? day - 1 : 0); // Gün sayısının negatif olmaması için kontrol eklendi
+    setDay(day - 1 >= 0 ? day - 1 : 0);
   };
 
   const handleSubmit = (e) => {
@@ -28,23 +31,29 @@ function Reservation() {
     setEmail("");
     setPassword("");
     setIsChecked(false);
+    // Yönlendirme işlemi
+  };
+  const handleRoomChange = (e) => {
+    setSelectedRoom(e.target.value);
   };
 
   return (
-    <>
+    <div>
+      <HomePageHeader></HomePageHeader>
+
       <form onSubmit={handleSubmit}>
-        <p>gün sayısı: {day}</p>
-        <button type="button" onClick={decrease}>
-          {" "}
-          azalt
-        </button>{" "}
-        {/* Formun gönderilmesini önlemek için type="button" eklendi */}
-        <button type="button" onClick={increase}>
-          {" "}
-          artır
-        </button>{" "}
-        {/* Formun gönderilmesini önlemek için type="button" eklendi */}
-        <PriceCalculator day={day} />
+        <label>
+          gün sayısı: {day}
+          <button type="button" onClick={decrease}>
+            azalt
+          </button>
+          <button type="button" onClick={increase}>
+            artır
+          </button>
+        </label>
+        <Room selectedRoom={selectedRoom} onSelectRoom={handleRoomChange} />
+        <PriceCalculator day={day} roomType={selectedRoom} />
+
         <div className="row">
           <div className="col">
             Name:
@@ -108,8 +117,11 @@ function Reservation() {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+
+        {/* Route ile success sayfasına yönlendirme */}
       </form>
-    </>
+    </div>
   );
 }
+
 export default Reservation;

@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
 
-function PriceCalculator({ day }) {
+function PriceCalculator({ day, roomType }) {
   const [price, setPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+
+  // Örnek bir oda türü fiyatı listesi
+  const roomPrices = {
+    Standard: 100,
+    Deluxe: 150,
+    Suite: 200,
+  };
+
+  // Oda türü değiştikçe fiyatı güncelle
+  useEffect(() => {
+    setPrice(roomPrices[roomType] || 0);
+  }, [roomType]);
 
   useEffect(() => {
     calculateTotalPrice();
   }, [day, price]);
-
-  const HandlePriceChange = (event) => {
-    setPrice(Number(event.target.value));
-  };
 
   const calculateTotalPrice = () => {
     setTotalPrice(day * price);
@@ -18,13 +26,9 @@ function PriceCalculator({ day }) {
 
   return (
     <div>
-      <input
-        type="text"
-        value={price}
-        onChange={HandlePriceChange}
-        placeholder="Toplam tutar"
-      />
-      <button onClick={calculateTotalPrice}>toplam tutar: {totalPrice}</button>
+      <button onClick={calculateTotalPrice}>
+        {day} gün için Toplam Tutar: {totalPrice}
+      </button>
     </div>
   );
 }
