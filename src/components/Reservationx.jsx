@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PriceCalculator from "./PriceCalculator";
 import Room from "./Rooms";
 import HomePageHeader from "./HomePage/HomePageHeader";
 
-function Reservation() {
+function Reservation({ hotelInfo }) {
+  const navigate = useNavigate();
+
   const [day, setDay] = useState(0);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -32,14 +35,17 @@ function Reservation() {
     setPassword("");
     setIsChecked(false);
     // Yönlendirme işlemi
+    navigate(`/hotel/${hotelInfo.id}//${hotelInfo.name}/reservation/success`); // "/success" sayfasına yönlendir
   };
+
   const handleRoomChange = (e) => {
     setSelectedRoom(e.target.value);
   };
 
   return (
     <div>
-      <HomePageHeader></HomePageHeader>
+      <HomePageHeader />
+      <h3>{hotelInfo.name}</h3>
 
       <form onSubmit={handleSubmit}>
         <label>
@@ -117,8 +123,6 @@ function Reservation() {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
-
-        {/* Route ile success sayfasına yönlendirme */}
       </form>
     </div>
   );

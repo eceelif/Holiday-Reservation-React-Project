@@ -1,0 +1,32 @@
+/* Footer container */
+.footer-container {
+  padding: 30px 0;
+  background-color: #f8f9fa;
+}
+
+.footerFirst {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.socialMedia i {
+  color: #6c757d;
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+/* Copyright text */
+.copy-text {
+  margin-top: 20px;
+  color: #6c757d;
+}
+
+.copy-text a {
+  color: #6c757d;
+}
+
+.copy-text a:hover {
+  color: #007bff;
+}

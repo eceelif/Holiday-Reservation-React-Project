@@ -1,5 +1,5 @@
 import React from "react";
-import HotelList from "./Hotels";
+import HotelList from "./HotelList";
 import HomePageFooter from "./HomePageFooter";
 import HomePageHeader from "./HomePageHeader";
 

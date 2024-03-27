@@ -1,6 +1,7 @@
 // HomePageHeader.jsx
 import React from "react";
 import { Link } from "react-router-dom";
+import "./HomePageHeader.css";
 
 function HomePageHeader() {
   return (

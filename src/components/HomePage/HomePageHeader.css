@@ -1,0 +1,35 @@
+.home-page-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  color: #bb1313;
+  padding: 20px;
+  font-family: "Roboto Condensed";
+  background-color: #f2f2f2;
+}
+.columns {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 0px 150px;
+}
+h4 {
+  margin-top: 0; /* Başlık için üst boşluk kaldırma */
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Adres bilgilerini sola hizalar */
+  margin-bottom: 10px; /* Adres bilgileri ile telefon arasına boşluk bırakır */
+}
+
+
+.socialMedia {
+  display: flex;
+  flex-wrap: wrap;/* Sosyal medyayı sağa hizalar */
+}
+
+.home-page-footer span {
+  margin-right: 10px; /* Span elemanları arasına boşluk ekler */
+}
