@@ -17,7 +17,7 @@ function SuccessPage() {
           <p>Soyad: {reservationInfo.lastName}</p>
           <p>E-posta: {reservationInfo.email}</p>
           <p>Oda Türü: {reservationInfo.selectedRoom}</p>
-          <PriceCalculatorn
+          <PriceCalculator
             day={reservationInfo.day}
             roomType={reservationInfo.selectedRoom}
           />

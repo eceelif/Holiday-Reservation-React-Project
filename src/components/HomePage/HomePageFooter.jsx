@@ -6,12 +6,14 @@ function HomePageFooter() {
   return (
     <MDBFooter bgColor="light" className="text-center text-lg-start text-muted">
       <section className="footerFirst">
-        <div className="me-5 d-none d-lg-block">
+        <div className="me-5 ">
           <h1>İLETİŞİM BİLGİLERİ</h1>
-          <div className="me-4 d-none d-lg-block">
+          <div className="me-4">
             <h2>Adres Bilgileri</h2>
             <p> adres ayrintısı </p>
-            <p>Telefon numarası:0fgfhghgf02343433</p>
+            <p className="phone">
+              Telefon numarası: <p className="phone2"> 0fgfhghgf02343433 </p>
+            </p>
           </div>
 
           <div>

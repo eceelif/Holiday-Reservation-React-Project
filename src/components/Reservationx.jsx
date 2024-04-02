@@ -1,59 +1,30 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PriceCalculator from "./PriceCalculator";
-import Room from "./Rooms";
-import HomePageHeader from "./HomePage/HomePageHeader";
+import { useForm } from "react-hook-form";
 import { saveToLocalStorage } from "../LocalStorageHelper";
+import UserInformationForm from "./userInformationForm";
+import Room from "./Rooms";
+import PriceCalculator from "./PriceCalculator";
+import HomePageHeader from "./HomePage/HomePageHeader";
 
-function Reservation(props) {
-  const { hotelInfo } = props;
-  console.log("Hotel Name:", hotelInfo.hotelName); // Doğru otel adını gösterdiğinden emin olun
-
+function ReservationForm({ hotelInfo }) {
   const navigate = useNavigate();
 
-  const [day, setDay] = useState(0);
-  const [adult, setAdult] = useState(0);
-  const [children, setChildren] = useState(0);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
+  const { register, handleSubmit } = useForm();
   const [selectedRoom, setSelectedRoom] = useState("Standard");
 
-  const increase = () => {
-    setDay(day + 1);
-    setChildren(children + 1);
-  };
-  const AdalutIncrease = () => {
-    setAdult(adult + 1);
-  };
-  const ChildrenIncrease = () => {
-    setChildren(children + 1);
-  };
-  const decrease = () => {
-    setDay(day - 1 >= 0 ? day - 1 : 0);
-  };
-  const AdultDecrease = () => {
-    setAdult(adult - 1 >= 0 ? adult - 1 : 0);
-  };
-  const ChildrenDecrease = () => {
-    setChildren(children - 1 >= 0 ? children - 1 : 0);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const onSubmit = (data) => {
     // Yerel depolama kullanarak bilgileri kaydet
     saveToLocalStorage("reservationInfo", {
-      day,
-      adult,
-      children,
-      firstName,
-      lastName,
-      email,
-      password,
-      isChecked,
-      selectedRoom,
+      day: data.day,
+      adult: data.adult,
+      children: data.children,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+      isChecked: data.isChecked,
+      selectedRoom: selectedRoom,
     });
 
     // Yönlendirme işlemi
@@ -69,98 +40,38 @@ function Reservation(props) {
       <HomePageHeader />
       <h3>Otel adı: {hotelInfo.hotelName}</h3>{" "}
       {/* Artık otel adı gösterilebilir */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {/* Form içeriği buraya gelecek */}
         <label>
-          gün sayısı: {day}
-          <button type="button" onClick={decrease}>
-            azalt
-          </button>
-          <button type="button" onClick={increase}>
-            artır
-          </button>
+          gün sayısı:{" "}
+          <input
+            type="number"
+            {...register("day")}
+            defaultValue={0}
+            onChange={() => {}}
+          />
         </label>
         <label>
-          yetişkin sayısı: {adult}
-          <button type="button" onClick={AdultDecrease}>
-            azalt
-          </button>
-          <button type="button" onClick={AdalutIncrease}>
-            artır
-          </button>
+          yetişkin sayısı:{" "}
+          <input
+            type="number"
+            {...register("adult")}
+            defaultValue={0}
+            onChange={() => {}}
+          />
         </label>
         <label>
-          Çocuk sayısı:{children}
-          <button type="button" onClick={ChildrenDecrease}>
-            azalt
-          </button>
-          <button type="button" onClick={ChildrenIncrease}>
-            artır
-          </button>
+          Çocuk sayısı:{" "}
+          <input
+            type="number"
+            {...register("children")}
+            defaultValue={0}
+            onChange={() => {}}
+          />
         </label>
         <Room selectedRoom={selectedRoom} onSelectRoom={handleRoomChange} />
-        <PriceCalculator day={day} roomType={selectedRoom} />
-
-        <div className="row">
-          <div className="col">
-            Name:
-            <input
-              type="text"
-              className="form-control"
-              placeholder="First name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
-          <div className="col">
-            Last name:
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Last name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-            checked={isChecked}
-            onChange={(e) => setIsChecked(e.target.checked)}
-          />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
-          </label>
-        </div>
+        <PriceCalculator day={0} roomType={selectedRoom} />
+        <UserInformationForm register={register} />
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
@@ -169,4 +80,4 @@ function Reservation(props) {
   );
 }
 
-export default Reservation;
+export default ReservationForm;

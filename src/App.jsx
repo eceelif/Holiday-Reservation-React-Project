@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage/HomePage";
 import WeatherComponent from "./components/WeatherData";
 import Hotel from "./components/HomePage/Hotel";
 import SuccessPage from "./components/Success";
+import HookForm from "./components/HookExampleForm";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         {/* Burada diğer bileşenlerin içeriğini de ekleyebilirsiniz */}
         <Routes>
           <Route path="/home" element={<HomePage />} />
+          <Route path="/hook" element={<HookForm />} />
           <Route
             path="/hotel/:hotelId/reservation"
             element={<Reservation hotelInfo={{ name: "Hotel Name" }} />}
