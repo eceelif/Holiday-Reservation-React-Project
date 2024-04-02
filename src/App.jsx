@@ -14,12 +14,14 @@ function App() {
         {/* Burada diğer bileşenlerin içeriğini de ekleyebilirsiniz */}
         <Routes>
           <Route path="/home" element={<HomePage />} />
-          <Route path="/reservation/:hotelId" element={<Reservation />} />
+          <Route
+            path="/hotel/:hotelId/reservation"
+            element={<Reservation hotelInfo={{ name: "Hotel Name" }} />}
+          />{" "}
           <Route path="/weather" element={<WeatherComponent />} />
           <Route path="/hotel/:hotelId" element={<Hotel />} />
-          <Route path="/hotel/:hotelId/reservation" element={<Reservation />} />
           <Route
-            path="/hotel/:hotelId/:hotelName/reservation/success"
+            path="/hotel/:hotelId/:reservation/success"
             element={<SuccessPage />}
           />
         </Routes>

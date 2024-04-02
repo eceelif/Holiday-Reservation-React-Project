@@ -3,11 +3,17 @@ import { useNavigate } from "react-router-dom";
 import PriceCalculator from "./PriceCalculator";
 import Room from "./Rooms";
 import HomePageHeader from "./HomePage/HomePageHeader";
+import { saveToLocalStorage } from "../LocalStorageHelper";
 
-function Reservation({ hotelInfo }) {
+function Reservation(props) {
+  const { hotelInfo } = props;
+  console.log("Hotel Name:", hotelInfo.hotelName); // Doğru otel adını gösterdiğinden emin olun
+
   const navigate = useNavigate();
 
   const [day, setDay] = useState(0);
+  const [adult, setAdult] = useState(0);
+  const [children, setChildren] = useState(0);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,25 +23,41 @@ function Reservation({ hotelInfo }) {
 
   const increase = () => {
     setDay(day + 1);
+    setChildren(children + 1);
   };
-
+  const AdalutIncrease = () => {
+    setAdult(adult + 1);
+  };
+  const ChildrenIncrease = () => {
+    setChildren(children + 1);
+  };
   const decrease = () => {
     setDay(day - 1 >= 0 ? day - 1 : 0);
   };
-
+  const AdultDecrease = () => {
+    setAdult(adult - 1 >= 0 ? adult - 1 : 0);
+  };
+  const ChildrenDecrease = () => {
+    setChildren(children - 1 >= 0 ? children - 1 : 0);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Formun gönderilme işlemleri burada gerçekleştirilebilir
-    // Örneğin, bir API'ye veri göndermek veya başka bir işlem yapmak
-    // Ardından formu temizleyebilirsiniz
-    setDay(0);
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPassword("");
-    setIsChecked(false);
+
+    // Yerel depolama kullanarak bilgileri kaydet
+    saveToLocalStorage("reservationInfo", {
+      day,
+      adult,
+      children,
+      firstName,
+      lastName,
+      email,
+      password,
+      isChecked,
+      selectedRoom,
+    });
+
     // Yönlendirme işlemi
-    navigate(`/hotel/${hotelInfo.id}//${hotelInfo.name}/reservation/success`); // "/success" sayfasına yönlendir
+    navigate(`/hotel/${hotelInfo.id}/reservation/success`); // "/success" sayfasına yönlendir
   };
 
   const handleRoomChange = (e) => {
@@ -45,15 +67,34 @@ function Reservation({ hotelInfo }) {
   return (
     <div>
       <HomePageHeader />
-      <h3>{hotelInfo.name}</h3>
-
+      <h3>Otel adı: {hotelInfo.hotelName}</h3>{" "}
+      {/* Artık otel adı gösterilebilir */}
       <form onSubmit={handleSubmit}>
+        {/* Form içeriği buraya gelecek */}
         <label>
           gün sayısı: {day}
           <button type="button" onClick={decrease}>
             azalt
           </button>
           <button type="button" onClick={increase}>
+            artır
+          </button>
+        </label>
+        <label>
+          yetişkin sayısı: {adult}
+          <button type="button" onClick={AdultDecrease}>
+            azalt
+          </button>
+          <button type="button" onClick={AdalutIncrease}>
+            artır
+          </button>
+        </label>
+        <label>
+          Çocuk sayısı:{children}
+          <button type="button" onClick={ChildrenDecrease}>
+            azalt
+          </button>
+          <button type="button" onClick={ChildrenIncrease}>
             artır
           </button>
         </label>

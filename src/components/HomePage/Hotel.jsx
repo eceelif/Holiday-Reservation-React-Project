@@ -1,3 +1,4 @@
+// Hotel.jsx
 import React from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import Reservation from "../Reservationx";
@@ -7,9 +8,10 @@ const Hotel = () => {
   const navigate = useNavigate(); // useNavigate hook'u ekleniyor
   const hotelName = location.state.hotelName;
   const { hotelId } = useParams();
+  const hotelInfo = { id: hotelId, hotelName }; // otel bilgisi oluşturuluyor
 
   const handleReservationClick = () => {
-    navigate(`/hotel/${hotelId}/reservation`, { state: { hotelName } });
+    navigate(`/hotel/${hotelId}/reservation`, { state: { hotelInfo } });
   };
 
   return (
