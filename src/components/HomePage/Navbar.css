@@ -1,0 +1,18 @@
+.gece-modu {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  .toggle {
+    padding: 8px 16px;
+    background-color: lightgray;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle:hover {
+    background-color: darkgray;
+  }
+  
