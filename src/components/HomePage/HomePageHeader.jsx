@@ -1,23 +1,31 @@
-// HomePageHeader.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import "./HomePageHeader.css";
 
 function HomePageHeader() {
   return (
-    <div className="title">
-      <h1>En güzel tatil planları...</h1>
-      <ul>
-        <li>
-          <Link to="/home">Home</Link>
-        </li>
-        <li>
-          <Link to="/reservation">Reservation</Link>
-        </li>
-        <li>
-          <Link to="/weather">Weather</Link>
-        </li>
-      </ul>
+    <div className="bg-blue-500 py-4">
+      <div className="container mx-auto">
+        <div className="text-white text-center">
+          <h1 className="text-4xl font-bold">En güzel tatil planları...</h1>
+          <ul className="mt-4 flex justify-center space-x-4">
+            <li>
+              <Link to="/home" className="text-white hover:underline">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/reservation" className="text-white hover:underline">
+                Reservation
+              </Link>
+            </li>
+            <li>
+              <Link to="/weather" className="text-white hover:underline">
+                Weather
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

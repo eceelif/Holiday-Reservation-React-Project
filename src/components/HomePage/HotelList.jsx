@@ -1,5 +1,3 @@
-// HotelList.jsx
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -39,15 +37,23 @@ const HotelList = () => {
   };
 
   return (
-    <div>
-      <h2>Hotel List</h2>
+    <div className="p-8">
+      <h2 className="text-3xl font-bold mb-4">Hotel List</h2>
       <ul>
         {hotels.map((hotel) => (
-          <li key={hotel.id}>
-            <h3>{hotel.name}</h3>
-            <p>Address: {hotel.address}</p>
-            <p>Phone: {hotel.phoneNumber}</p>
-            <button onClick={() => handleHotelSelect(hotel)}>Select</button>
+          <li
+            key={hotel.id}
+            className="bg-gray-100 rounded-lg shadow-md p-4 mb-4"
+          >
+            <h3 className="text-xl font-semibold mb-2">{hotel.name}</h3>
+            <p className="text-gray-600 mb-2">Address: {hotel.address}</p>
+            <p className="text-gray-600 mb-4">Phone: {hotel.phoneNumber}</p>
+            <button
+              onClick={() => handleHotelSelect(hotel)}
+              className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md focus:outline-none"
+            >
+              Select
+            </button>
           </li>
         ))}
       </ul>

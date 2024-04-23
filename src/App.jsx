@@ -12,7 +12,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* Burada diğer bileşenlerin içeriğini de ekleyebilirsiniz */}
         <Routes>
           <Route path="/home" element={<HomePage />} />
           <Route path="/hook" element={<HookForm />} />
